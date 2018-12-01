@@ -1,24 +1,28 @@
 import { frequencies } from './frequencies';
 
-export const day1_2 = (): number => {
-  let result: number = 0;
-  const resultsList: number[] = [0];
-  let repeat: number|null = null;
-  let loop = 0;
+function* generateResults(): IterableIterator<number> {
+  let index: number = 0;
+  let results: number = 0;
 
-  while (repeat == null) {
-    for (let i = 0; i < frequencies.length; i += 1) {
-      const frequency = frequencies[i];
-      result += frequency;
+  yield results;
 
-      if (resultsList.indexOf(result) !== -1) {
-        repeat = result;
-        break;
-      }
-      resultsList.push(result);
-    }
-    loop += 1;
+  while (true) {
+    results += frequencies[index];
+    yield results;
+    index = (index + 1) % frequencies.length;
   }
+}
 
-  return repeat;
+export const day1_2 = (): number => {
+  const resultsList: number[] = [];
+  let results: number|null = null;
+
+  for (const step of generateResults()) {
+    if (resultsList.indexOf(step) !== -1) {
+      results = step;
+      break;
+    }
+    resultsList.push(step);
+  }
+  return Number(results);
 };

@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "target": "es5",
+    "downlevelIteration": true,
     "strict": true,
     "removeComments": true,
     "preserveConstEnums": true,

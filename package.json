@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "build": "tsc && node build",
-    "lint": "tslint -c tslint.json --project tsconfig.json",
+    "lint": "tslint -c tslint.json -p tsconfig.json -t verbose",
     "test": "jest"
   },
   "repository": {
