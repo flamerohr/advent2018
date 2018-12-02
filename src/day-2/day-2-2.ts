@@ -1,8 +1,8 @@
 import { ids } from './ids';
 
-const matchLetters = (source: string, target: string) => {
-  let results = '';
-  let errors = 0;
+const matchLetters = (source: string, target: string): string => {
+  let results: string = '';
+  let errors: number = 0;
 
   if (source === target) {
     return '';
@@ -21,16 +21,14 @@ const matchLetters = (source: string, target: string) => {
 };
 
 export const day2_2 = (): string => {
-  const results: string[] = [];
-  ids.forEach((source) => {
-    ids.forEach((target) => {
+  for (const source of ids) {
+    for (const target of ids) {
       const match = matchLetters(source, target);
 
-      if (match && results.indexOf(match) === -1) {
-        results.push(match);
+      if (match) {
+        return match;
       }
-    });
-  });
-
-  return results.shift() || '';
+    }
+  }
+  return '';
 };

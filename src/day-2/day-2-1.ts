@@ -28,13 +28,10 @@ export const day2_1 = (): number => {
     .map(countLetters);
 
   const count2: number = mappings
-    .map(mapping => hasCount(mapping, 2))
-    .filter(item => item)
+    .filter(mapping => hasCount(mapping, 2))
     .length;
-
   const count3: number = mappings
-    .map(mapping => hasCount(mapping, 3))
-    .filter(item => item)
+    .filter(mapping => hasCount(mapping, 3))
     .length;
 
   return count2 * count3;
