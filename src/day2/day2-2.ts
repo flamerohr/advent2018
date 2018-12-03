@@ -15,7 +15,7 @@ export const day2_2 = (): string => {
   }
 
   const expectedLength = ids[0].length - 1;
-  const id = pairs
+  const id: string|undefined = pairs
     .map(matchLetters)
     .filter(id => id.length === expectedLength)
     .shift();

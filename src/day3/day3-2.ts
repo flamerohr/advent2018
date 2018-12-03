@@ -21,7 +21,9 @@ const filterColumns = (claimIds: number[], column: ClaimedColumn): number[] => {
 export const day3_2 = (): number => {
   const claimIds: number[] = fabricClaims.map(getId);
 
-  const claimId = claimMap.reduce(filterColumns, claimIds).shift();
+  const claimId: number|undefined = claimMap
+    .reduce(filterColumns, claimIds)
+    .shift();
 
   if (typeof claimId !== 'number') {
     throw Error('No id found');
