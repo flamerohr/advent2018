@@ -6,18 +6,21 @@ import { day3_1 } from './day-3/day-3-1';
 import { day3_2 } from './day-3/day-3-2';
 
 const args: string[] = process.argv.slice(2);
-const runDay = (day: string): boolean => {
-  return args.length === 0 || args.indexOf(day) !== -1;
+const runDay = (day: string, part1: Function = () => '', part2: Function = () => '') => {
+  if (args.length !== 0 && args.indexOf(day) === -1) {
+    return;
+  }
+
+  try {
+    console.info(`Day ${day} results are: ${part1()}, ${part2()}`);
+  } catch (e) {
+    const error = (e as Error);
+    console.error(error.message);
+  }
 };
 
-if (runDay('1')) {
-  console.info('Day 1 results are:', day1_1(), ',', day1_2());
-}
+runDay('1', day1_1, day1_2);
 
-if (runDay('2')) {
-  console.info('Day 2 results are:', day2_1(), ',', day2_2());
-}
+runDay('2', day2_1, day2_2);
 
-if (runDay('3')) {
-  console.info('Day 3 results are:', day3_1(), ',', day3_2());
-}
+runDay('3', day3_1, day3_2);

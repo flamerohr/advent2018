@@ -24,5 +24,9 @@ export const day1_2 = (): number => {
     }
     resultsList.push(step);
   }
-  return Number(results);
+
+  if (typeof results !== 'number') {
+    throw Error('No frequency found');
+  }
+  return results;
 };

@@ -23,5 +23,8 @@ export const day3_2 = (): number => {
 
   const claimId = claimMap.reduce(filterColumns, claimIds).shift();
 
-  return Number(claimId);
+  if (typeof claimId !== 'number') {
+    throw Error('No id found');
+  }
+  return claimId;
 };

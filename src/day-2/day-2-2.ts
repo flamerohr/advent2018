@@ -19,5 +19,9 @@ export const day2_2 = (): string => {
     .map(matchLetters)
     .filter(id => id.length === expectedLength)
     .shift();
-  return String(id);
+
+  if (typeof id !== 'string') {
+    throw Error('No id found');
+  }
+  return id;
 };
