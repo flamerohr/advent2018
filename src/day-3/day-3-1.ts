@@ -1,9 +1,10 @@
 import { claimMap, ClaimedColumn, ClaimedRow } from './claimMap';
 
 const countRows = (rowTotal: number, row: ClaimedRow): number => {
-  const rowCount = row.length > 1 ? 1 : 0;
-
-  return rowTotal + rowCount;
+  if (row.length > 1) {
+    return rowTotal + 1;
+  }
+  return rowTotal;
 };
 
 const countColumns = (columnTotal: number, column: ClaimedColumn): number => {
