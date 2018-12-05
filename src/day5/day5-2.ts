@@ -35,6 +35,5 @@ export const day5_2 = (): number => {
       '',
     );
 
-  console.log(count);
   return count[shortest];
 };

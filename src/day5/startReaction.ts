@@ -1,22 +1,19 @@
 export const startReaction = (polymer: string): string => {
-  let index = 0;
-  const reacting: string[] = polymer.split('');
+  const state: string[] = polymer.split('');
 
-  while (index < reacting.length) {
-    const current = reacting[index];
-    const next = reacting[index + 1];
+  for (let index = 0; index < state.length; index += 1) {
+    const current = state[index];
+    const next = state[index + 1];
 
     if (next && current &&
       next.toLowerCase() === current.toLowerCase() &&
       next !== current) {
-      reacting.splice(index, 2);
+      state.splice(index, 2);
 
       // go back, just in case a reaction to the previous character happens
-      index -= 1;
-    } else {
-      index += 1;
+      index -= 2;
     }
   }
 
-  return reacting.join('');
+  return state.join('');
 };
