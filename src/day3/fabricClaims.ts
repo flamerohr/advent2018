@@ -8,7 +8,7 @@ export interface FabricClaimModel {
   id: number;
 }
 
-const parserNamed = /^\#(?<id>\d+) @ (?<left>\d+),(?<top>\d+): (?<width>\d+)x(?<height>\d+)$/;
+// const parserNamed = /^\#(?<id>\d+) @ (?<left>\d+),(?<top>\d+): (?<width>\d+)x(?<height>\d+)$/;
 
 const parser = /^\#(\d+) @ (\d+),(\d+): (\d+)x(\d+)$/;
 
