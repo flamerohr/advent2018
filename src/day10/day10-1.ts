@@ -5,37 +5,28 @@ import { stepPoints } from './stepPoints';
 
 export const day10_1 = (): number => {
   const markedPoints = markPoints(points);
-  let seconds = 0;
-  let currentWidth = 0;
-  let currentDraw = null;
+  const { x, dX } = markedPoints[0];
 
+  let seconds = Math.floor(Math.abs(x / dX) * .95);
+  let currentHeight = 0;
+
+  console.log('offset:', seconds);
+  stepPoints(markedPoints, seconds);
   while (true) {
     stepPoints(markedPoints, 1);
     seconds += 1;
 
-    const map: number[] = [];
-    let countOver: number = 0;
-    markedPoints.forEach((point) => {
-      map[point.y] = (map[point.y] || 0) + 1;
-      if (map[point.y] === 20) {
-        countOver += 1;
-      }
-    });
-    if (countOver >= 5) {
-      const newDraw = drawPoints(markedPoints, 1);
-      const newWidth = newDraw[0].length;
-
-      if (currentWidth === 0) {
-        currentWidth = newWidth;
-      }
-      if (currentDraw && currentWidth < newWidth) {
-        console.log('seconds:', seconds - 1);
-        console.log(`${currentDraw.join('\n')}${'\n'}`);
-        break;
-      }
-      currentWidth = newWidth;
-      currentDraw = newDraw;
+    const vertical = markedPoints.map(point => point.y);
+    const minY = Math.min(...vertical);
+    const maxY = Math.max(...vertical);
+    const newHeight = maxY - minY;
+    if (currentHeight && newHeight > currentHeight) {
+      stepPoints(markedPoints, -1);
+      console.log(`${drawPoints(markedPoints, 1).join('\n')}${'\n'}`);
+      console.log('seconds:', seconds - 1);
+      break;
     }
+    currentHeight = newHeight;
   }
 
   return seconds - 1;
