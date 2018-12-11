@@ -6,7 +6,7 @@ import { stepPoints } from './stepPoints';
 export const day10_1 = (): number => {
   const markedPoints = markPoints(points);
   const x = markedPoints
-    .reduce((total, point) => total + (point.x / point.dX * -1), 0)
+    .reduce((total, point) => point.dX ? total + (point.x / point.dX * -1) : total, 0)
     / markedPoints.length;
 
   let seconds = Math.floor(x * 0.99);
