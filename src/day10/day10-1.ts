@@ -5,12 +5,14 @@ import { stepPoints } from './stepPoints';
 
 export const day10_1 = (): number => {
   const markedPoints = markPoints(points);
-  const { x, dX } = markedPoints[0];
+  const x = markedPoints
+    .reduce((total, point) => total + (point.x / point.dX * -1), 0)
+    / markedPoints.length;
 
-  let seconds = Math.floor(Math.abs(x / dX) * .95);
+  let seconds = Math.floor(x * 0.99);
   let currentHeight = 0;
 
-  console.log('offset:', seconds);
+  console.log('offset:', seconds, x);
   stepPoints(markedPoints, seconds);
   while (true) {
     stepPoints(markedPoints, 1);
