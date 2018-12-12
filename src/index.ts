@@ -17,6 +17,8 @@ import { day8_2 } from './day8/day8-2';
 import { day9_1 } from './day9/day9-1';
 import { day9_2 } from './day9/day9-2';
 import { day10_1 } from './day10/day10-1';
+import { day11_1 } from './day11/day11-1';
+import { day11_2 } from './day11/day11-2';
 
 const args: string[] = process.argv.slice(2);
 const runDay = (day: string, part1: Function = () => '', part2: Function = () => '') => {
@@ -60,6 +62,8 @@ runDay('8', day8_1, day8_2);
 runDay('9', day9_1, day9_2);
 
 runDay('10', day10_1);
+
+runDay('11', day11_1, day11_2);
 
 if (args.length === 0) {
   console.timeEnd('App runtime');

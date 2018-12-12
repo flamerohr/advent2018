@@ -13,13 +13,26 @@ const getHeight = (markedPoints: Point[]) => {
 export const day10_1 = (): number => {
   const markedPoints = markPoints(points);
   const x = markedPoints
-    .reduce((total, point) => point.dX ? total + (point.x / point.dX * -1) : total, 0)
-    / markedPoints.length;
+    .reduce(
+      (smallest: number | null, point) => {
+        if (!point.dX) {
+          return smallest;
+        }
 
-  let seconds = Math.floor(x * 0.99);
+        const goal = point.x / point.dX * -1;
+        if (smallest === null) {
+          return goal;
+        }
+
+        return Math.min(smallest || 0, goal);
+      },
+      null,
+    ) || 0;
+
+  let seconds = Math.floor(x - 1);
   let currentHeight = getHeight(markedPoints);
 
-  console.log('offset:', seconds, x);
+  console.log('start:', seconds);
   stepPoints(markedPoints, seconds);
   while (true) {
     stepPoints(markedPoints, 1);
@@ -29,12 +42,12 @@ export const day10_1 = (): number => {
 
     if (newHeight > currentHeight) {
       stepPoints(markedPoints, -1);
+      seconds -= 1;
       console.log(`${drawPoints(markedPoints, 1).join('\n')}${'\n'}`);
-      console.log('seconds:', seconds - 1);
       break;
     }
     currentHeight = newHeight;
   }
 
-  return seconds - 1;
+  return seconds;
 };
