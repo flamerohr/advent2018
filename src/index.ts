@@ -23,6 +23,8 @@ import { day12_1 } from './day12/day12-1';
 import { day12_2 } from './day12/day12-2';
 import { day13_1 } from './day13/day13-1';
 import { day13_2 } from './day13/day13-2';
+import { day14_1 } from './day14/day14-1';
+import { day14_2 } from './day14/day14-2';
 
 const args: string[] = process.argv.slice(2);
 const runDay = (day: string, part1: Function = () => '', part2: Function = () => '') => {
@@ -32,15 +34,23 @@ const runDay = (day: string, part1: Function = () => '', part2: Function = () =>
 
   try {
     if (args.length !== 0) {
-      console.time('Day runtime');
+      console.time('Part 1 runtime');
     }
-    console.info(`Day ${day} results are: ${part1()}, ${part2()}`);
+    const result1 = part1();
     if (args.length !== 0) {
-      console.timeEnd('Day runtime');
+      console.timeEnd('Part 1 runtime');
     }
+    if (args.length !== 0) {
+      console.time('Part 2 runtime');
+    }
+    const result2 = part2();
+    if (args.length !== 0) {
+      console.timeEnd('Part 2 runtime');
+    }
+    console.info(`Day ${day} results are: ${result1}, ${result2}`);
   } catch (e) {
     const error = (e as Error);
-    console.error(error.message);
+    console.trace(error.message);
   }
 };
 
@@ -72,6 +82,8 @@ runDay('11', day11_1, day11_2);
 runDay('12', day12_1, day12_2);
 
 runDay('13', day13_1, day13_2);
+
+runDay('14', day14_1, day14_2);
 
 if (args.length === 0) {
   console.timeEnd('App runtime');

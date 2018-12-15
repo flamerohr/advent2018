@@ -1,19 +1,17 @@
 import { Cart } from './cart';
 import { Tile } from './map';
+import { Reset, BgRed, BgGreen } from '../colours';
 
 export const printMap = (map: Tile[][], carts: Cart[]) => {
   const printMap: string[][] = map.map(column => column.map(value => value));
 
-  const RESET = '\x1b[0m';
-  const RED = '\x1b[41m';
-  const GREEN = '\x1b[42m';
   carts.forEach((cart) => {
     const status = printMap[cart.x][cart.y];
     if (['/', '\\', '|', '-', '+'].indexOf(status) === -1) {
-      printMap[cart.x][cart.y] = `${RED}X${RESET}`;
+      printMap[cart.x][cart.y] = `${BgRed}X${Reset}`;
       return;
     }
-    printMap[cart.x][cart.y] = `${GREEN}${cart.facing}${RESET}`;
+    printMap[cart.x][cart.y] = `${BgGreen}${cart.facing}${Reset}`;
   });
 
   const output = [];
