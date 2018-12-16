@@ -3,10 +3,15 @@ export enum Tile {
   open = '.',
 }
 
-export interface Unit {
-  id: number;
+export interface Point {
   x: number;
   y: number;
+}
+
+export interface Unit extends Point {
+  id: number;
+  hp: number;
+  attack: number;
   type: 'E'|'G';
 }
 
@@ -50,6 +55,8 @@ export const extractUnits = (mapString: string): { units: Unit[], map: Tile[][] 
           const unit: Unit = {
             x,
             y,
+            hp: 200,
+            attack: 3,
             id: units.length,
             type: tile,
           };

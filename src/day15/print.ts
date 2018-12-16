@@ -1,4 +1,4 @@
-import { Tile, Unit } from './extractUnits';
+import { Tile, Unit, sortUnits } from './extractUnits';
 import { drawMap } from './move';
 
 export const print = (map: Tile[][], units: Unit[]) => {
@@ -13,6 +13,10 @@ export const print = (map: Tile[][], units: Unit[]) => {
       output[y] += drawnMap[x][y];
     }
   }
+  units.sort(sortUnits);
+  units.forEach((unit) => {
+    output[unit.y] += `  (${unit.type}): ${unit.hp}`;
+  });
 
   console.log(output.join('\n'));
 };
