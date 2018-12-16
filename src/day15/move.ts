@@ -1,4 +1,4 @@
-import { Unit, Tile, Point } from './extractUnits';
+import { Unit, Tile, Point, sortUnits } from './extractUnits';
 
 export interface Location extends Point {
   path: Point[];
@@ -6,6 +6,16 @@ export interface Location extends Point {
 }
 
 export type DrawTile = Tile | 'E' | 'G' | 'O';
+
+export const sortLocation = (a: Location, b: Location) => {
+  if (a.path.length > b.path.length) {
+    return 1;
+  }
+  if (a.path.length < b.path.length) {
+    return -1;
+  }
+  return sortUnits(a.path[0], b.path[0]);
+};
 
 export const move = (unit: Unit, map: Tile[][], units: Unit[]) => {
   const drawnMap = drawMap(map, units);
@@ -15,6 +25,9 @@ export const move = (unit: Unit, map: Tile[][], units: Unit[]) => {
     // .filter(({ x, y }) => accessMap[x][y]);
 
   if (tiles.length > 0) {
+    if (tiles.find(({ x, y }) => x === unit.x && y === unit.y)) {
+      return;
+    }
     const location = getTargetLocation(unit, drawnMap);
     if (location && location.path.length > 0) {
       const target = location.path[0];
@@ -38,6 +51,8 @@ const getTargetLocation = (start: Unit, drawnMap: DrawTile[][]): Location|null =
   const markedMap: DrawTile[][] = drawnMap.map(column => column.slice(0));
   const queue: Location[] = [first];
 
+  const found: Location[] = [];
+
   while (queue.length > 0) {
     const current = queue.shift() as Location;
 
@@ -51,7 +66,7 @@ const getTargetLocation = (start: Unit, drawnMap: DrawTile[][]): Location|null =
     for (let i = 0; i < explore.length; i += 1) {
       const { x, y } = explore[i];
       if (markedMap[x][y] === enemyType) {
-        return current;
+        found.push(current);
       }
       if (markedMap[x][y] === Tile.open) {
         markedMap[x][y] = 'O';
@@ -59,7 +74,12 @@ const getTargetLocation = (start: Unit, drawnMap: DrawTile[][]): Location|null =
       }
     }
   }
-  return null;
+
+  if (found.length === 0) {
+    return null;
+  }
+  found.sort(sortLocation);
+  return found[0];
 };
 
 const addPoint = (point: Point, location: Location = { x: -1, y: -1, path: [] }): Location => {

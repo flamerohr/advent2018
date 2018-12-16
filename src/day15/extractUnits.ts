@@ -15,7 +15,7 @@ export interface Unit extends Point {
   type: 'E'|'G';
 }
 
-export const sortUnits = (a: Unit, b: Unit) => {
+export const sortUnits = (a: Point, b: Point) => {
   if (a.y > b.y) {
     return 1;
   }
@@ -28,6 +28,7 @@ export const sortUnits = (a: Unit, b: Unit) => {
   if (a.x < b.x) {
     return -1;
   }
+
   return 0;
 };
 

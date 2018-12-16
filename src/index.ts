@@ -33,26 +33,21 @@ const runDay = (day: string, part1: Function = () => '', part2: Function = () =>
     return;
   }
 
-  try {
-    if (args.length !== 0) {
-      console.time('Part 1 runtime');
-    }
-    const result1 = part1();
-    if (args.length !== 0) {
-      console.timeEnd('Part 1 runtime');
-    }
-    if (args.length !== 0) {
-      console.time('Part 2 runtime');
-    }
-    const result2 = part2();
-    if (args.length !== 0) {
-      console.timeEnd('Part 2 runtime');
-    }
-    console.info(`Day ${day} results are: ${result1}, ${result2}`);
-  } catch (e) {
-    const error = (e as Error);
-    console.trace(error.message);
+  if (args.length !== 0) {
+    console.time('Part 1 runtime');
   }
+  const result1 = part1();
+  if (args.length !== 0) {
+    console.timeEnd('Part 1 runtime');
+  }
+  if (args.length !== 0) {
+    console.time('Part 2 runtime');
+  }
+  const result2 = part2();
+  if (args.length !== 0) {
+    console.timeEnd('Part 2 runtime');
+  }
+  console.info(`Day ${day} results are: ${result1}, ${result2}`);
 };
 
 if (args.length === 0) {

@@ -1,4 +1,4 @@
-import { Unit, Tile } from './extractUnits';
+import { Unit, Tile, sortUnits } from './extractUnits';
 
 export const sortAttackUnits = (a: Unit, b: Unit) => {
   if (a.hp > b.hp) {
@@ -7,28 +7,23 @@ export const sortAttackUnits = (a: Unit, b: Unit) => {
   if (a.hp < b.hp) {
     return -1;
   }
-  if (a.y > b.y) {
-    return 1;
-  }
-  if (a.y < b.y) {
-    return -1;
-  }
-  if (a.x > b.x) {
-    return 1;
-  }
-  if (a.x < b.x) {
-    return -1;
-  }
-  return 0;
+  return sortUnits(a, b);
 };
 
-export const getAttackTarget = (unit: Unit, units: Unit[]): Unit => {
+export const attack = (unit: Unit, units: Unit[]): Unit|null => {
   const targets = units.filter(getTargets(unit));
   targets.sort(sortAttackUnits);
 
   const target = targets[0];
 
-  return target;
+  if (target) {
+    target.hp -= unit.attack;
+    // console.log(target);
+    if (target.hp <= 0) {
+      return target;
+    }
+  }
+  return null;
 };
 
 const getTargets = (unit: Unit) => (enemy: Unit): boolean => (
