@@ -40,7 +40,7 @@ export const day15_2 = () => {
         }
         const death = attack(unit, units);
         if (death && death.type === 'E') {
-          print(map, units);
+          // print(map, units);
           warWon = false;
           // console.log('Elf had died!');
           break battle;
@@ -59,8 +59,8 @@ export const day15_2 = () => {
     0,
   );
 
-  console.log('Boosted:', boost);
-  console.log('After round:', round);
-  print(map, units);
+  // console.log('Boosted:', boost);
+  // console.log('After round:', round);
+  // print(map, units);
   return sum * round;
 };
