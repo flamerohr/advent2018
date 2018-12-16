@@ -1,5 +1,5 @@
-import { input as input } from './input';
-import { extractUnits, sortUnits, Unit } from './extractUnits';
+import { input } from './input';
+import { extractUnits, sortUnits } from './extractUnits';
 import { print } from './print';
 import { move } from './move';
 import { attack } from './attack';
@@ -10,9 +10,12 @@ export const day15_1 = () => {
   let units = extraction.units;
   let round = 0;
 
+  units = extraction.units.map(unit => ({
+    ...unit,
+  }));
+
   battle:
   while (true) {
-    // console.log('End round:', round);
     // print(map, units);
     units.sort(sortUnits);
     const order = units;
@@ -28,18 +31,12 @@ export const day15_1 = () => {
       ) {
         break battle;
       }
-      const death = attack(unit, units);
+      attack(unit, units);
       units = units.filter(char => char.hp > 0);
-      if (death) {
-        console.log('Death round: ', round, death);
-      }
     }
 
     round += 1;
   }
-
-  console.log('After round:', round);
-  print(map, units);
 
   const sum = units.reduce(
     (total, unit) => {
@@ -48,5 +45,7 @@ export const day15_1 = () => {
     0,
   );
 
+  // console.log('After round:', round);
+  // print(map, units);
   return sum * round;
 };

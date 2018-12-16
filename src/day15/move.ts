@@ -2,7 +2,6 @@ import { Unit, Tile, Point, sortUnits } from './extractUnits';
 
 export interface Location extends Point {
   path: Point[];
-
 }
 
 export type DrawTile = Tile | 'E' | 'G' | 'O';
@@ -14,7 +13,7 @@ export const sortLocation = (a: Location, b: Location) => {
   if (a.path.length < b.path.length) {
     return -1;
   }
-  return sortUnits(a.path[0], b.path[0]);
+  return sortUnits(a, b);
 };
 
 export const move = (unit: Unit, map: Tile[][], units: Unit[]) => {
@@ -66,6 +65,7 @@ const getTargetLocation = (start: Unit, drawnMap: DrawTile[][]): Location|null =
     for (let i = 0; i < explore.length; i += 1) {
       const { x, y } = explore[i];
       if (markedMap[x][y] === enemyType) {
+        // return current;
         found.push(current);
       }
       if (markedMap[x][y] === Tile.open) {
@@ -75,10 +75,10 @@ const getTargetLocation = (start: Unit, drawnMap: DrawTile[][]): Location|null =
     }
   }
 
+  found.sort(sortLocation);
   if (found.length === 0) {
     return null;
   }
-  found.sort(sortLocation);
   return found[0];
 };
 
