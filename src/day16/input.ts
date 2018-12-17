@@ -1,3 +1,7 @@
+export const example = `Before: [3, 2, 1, 1]
+9 2 1 2
+After:  [3, 2, 2, 1]`;
+
 export const input = `Before: [0, 2, 2, 2]
 4 2 3 2
 After:  [0, 2, 5, 2]
