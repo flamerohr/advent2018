@@ -29,6 +29,7 @@ import { day15_1 } from './day15/day15-1';
 import { day15_2 } from './day15/day15-2';
 import { day16_1 } from './day16/day16-1';
 import { day16_2 } from './day16/day16-2';
+import { day17_1 } from './day17/day17-1';
 import { day18_1 } from './day18/day18-1';
 import { day18_2 } from './day18/day18-2';
 
@@ -90,7 +91,7 @@ runDay('15', day15_1, day15_2);
 
 runDay('16', day16_1, day16_2);
 
-runDay('17');
+runDay('17', day17_1);
 
 runDay('18', day18_1, day18_2);
 
