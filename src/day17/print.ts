@@ -2,14 +2,14 @@ import { Tile } from './getMap';
 import { FgCyan, FgBlue, FgWhite, FgGreen, FgYellow, Reset, BgBlue } from '../colours';
 import { Point } from './tick';
 
-export const print = (map: Tile[][], actives: Point[] = []) => {
+export const print = (map: Tile[][], actives: Point[] = [], lowest: number = 0) => {
   const print: string[][] = [];
 
   for (let x = 0; x < map.length; x += 1) {
-    for (let y = 0; y < map[x].length; y += 1) {
-      // if (y > 800) {
-      //   break;
-      // }
+    for (let y = lowest ? lowest - 30 : 0; y < map[x].length; y += 1) {
+      if (lowest && y > Math.max(lowest, 30) + 2) {
+        break;
+      }
       if (!print[y]) {
         print[y] = [];
       }

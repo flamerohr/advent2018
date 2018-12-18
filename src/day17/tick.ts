@@ -43,9 +43,8 @@ export const tick = (map: Tile[][], actives: Point[]): TickOutput => {
             break;
           }
           if (
-            newMap[dX - 1][y + 1] === Tile.clay &&
-            (newMap[dX][y + 1] === Tile.sand || newMap[dX][y + 1] === Tile.waterFlow) &&
-            (newMap[dX][y] === Tile.sand || newMap[dX][y] === Tile.waterFlow)
+            newMap[dX][y + 1] === Tile.sand ||
+            newMap[dX][y + 1] === Tile.waterFlow
           ) {
             highestX = dX + 1;
             overflow = true;
@@ -64,9 +63,8 @@ export const tick = (map: Tile[][], actives: Point[]): TickOutput => {
             break;
           }
           if (
-            newMap[dX + 1][y + 1] === Tile.clay &&
-            (newMap[dX][y + 1] === Tile.sand || newMap[dX][y + 1] === Tile.waterFlow) &&
-            (newMap[dX][y] === Tile.sand || newMap[dX][y] === Tile.waterFlow)
+            newMap[dX][y + 1] === Tile.sand ||
+            newMap[dX][y + 1] === Tile.waterFlow
           ) {
             lowestX = dX - 1;
             overflow = true;

@@ -19,5 +19,5 @@ const animate = (initial: Tile[][]) => {
   };
 
   print(map);
-  runTick();
+  setTimeout(runTick, 200);
 };

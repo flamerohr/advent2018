@@ -5,15 +5,14 @@ import { Point, tick } from './tick';
 
 export const day17_1 = (): string => {
   const initial: Tile[][] = getMap(scan);
-  let map = initial;
   let actives: Point[] = [{ x: 500, y: 0 }];
-  let turns = 0;
+
+  let map = initial;
 
   while (actives.length > 0) {
     const next = tick(map, actives);
     map = next.map;
     actives = next.actives;
-    turns += 1;
   }
 
   let start = false;
@@ -38,8 +37,6 @@ export const day17_1 = (): string => {
     }
   }
 
-  // print(map);
+  // print(map, actives);
   return `${all},${still}`;
 };
-
-// 31017 too high
