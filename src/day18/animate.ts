@@ -2,7 +2,7 @@ import { print } from './print';
 import { tick } from './tick';
 import { Tile } from './getMap';
 
-const animate = (initial: Tile[][]) => {
+export const animate = (initial: Tile[][]) => {
   let map = initial;
   let time = 0;
 
