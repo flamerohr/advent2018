@@ -36,6 +36,8 @@ import { day19_1 } from './day19/day19-1';
 import { day19_2 } from './day19/day19-2';
 import { day21_1 } from './day21/day21-1';
 import { day21_2 } from './day21/day21-2';
+import { day20_1 } from './day20/day20-1';
+import { day20_2 } from './day20/day20-2';
 
 const args: string[] = process.argv.slice(2);
 const runDay = (day: string, part1: Function = () => '', part2: Function = () => '') => {
@@ -100,6 +102,8 @@ runDay('17', day17_1);
 runDay('18', day18_1, day18_2);
 
 runDay('19', day19_1, day19_2);
+
+runDay('20', day20_1, day20_2);
 
 runDay('21', day21_1, day21_2);
 
